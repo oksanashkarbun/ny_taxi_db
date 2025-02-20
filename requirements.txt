@@ -1,0 +1,5 @@
+pandas
+sqlalchemy
+pyarrow
+gdown
+python-dotenv
