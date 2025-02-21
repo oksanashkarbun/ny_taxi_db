@@ -5,7 +5,7 @@
 ## **🚀 Getting Started**
 ### 1️⃣ Clone the repository
 ```sh
-git clone https://github.com/yourusername/ny_taxi_db_project.git
+git https://github.com/oksanashkarbun/ny_taxi_db.git
 cd ny_taxi_db_project
 ```
 
