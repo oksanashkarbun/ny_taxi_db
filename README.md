@@ -1,38 +1,74 @@
-# NY Taxi Database 
+# 🏙️ NY Taxi Database 🚖
 
-## 🚀 Getting Started
+---
 
+## **🚀 Getting Started**
 ### 1️⃣ Clone the repository
 ```sh
 git clone https://github.com/yourusername/ny_taxi_db_project.git
 cd ny_taxi_db_project
 ```
 
-### 2️⃣Install dependencies
-```sh
-pip install -r requirements.txt
+### 2️⃣ Create a .env File
+You need a .env file to store database credentials. Create it in the project root:
+```ini
+POSTGRES_USER=your_username
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=ny_taxi
+POSTGRES_HOST=pgdatabase
+POSTGRES_PORT=5432
+PGADMIN_DEFAULT_EMAIL=admin@admin.com
+PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
 ```
-##### How to Get the Data
-```sh
-python download_data.py
-```
-Check the `data/` folder for downloaded files.
 
-
-### 3️⃣ Start the PostgreSQL database
+## 🛠 Running it
+### 3️⃣ Start PostgreSQL and pgAdmin
 ```sh
 docker-compose up -d
 ```
+This starts:
+✅ PostgreSQL on localhost:5432
+✅ pgAdmin on http://localhost:8080 (Login: admin@admin.com / password)
 
-### 4️⃣ Run the data ingestion script
+### 4️⃣ Download Data
 ```sh
-python ingest_data.py --user user --password password --host localhost --port 5432 --db ny_taxi --table_name taxi_data --url <DATASET_URL>
+docker-compose run data_processor python download_data.py
 ```
 
-### 5️⃣ Access pgAdmin
-Open: http://localhost:8080
-Login: admin@admin.com / password
+### 5️⃣ Ingest Data into PostgreSQL
+```shell
+docker-compose run data_processor python ingest_data.py
+```
+Verify tables exist:
+```shell
+docker-compose run data_processor psql -h pgdatabase -U user -d ny_taxi -c "\dt"
+```
 
-
-
-
+## 🖥️ Accessing the Database
+### 🔹 pgAdmin (GUI)
+1. Open http://localhost:8080.
+2. Login: admin@admin.com / your_pgadmin_password.
+3. Connect to PostgreSQL using:
+ - Host: pgdatabase
+ - Port: 5432
+ - Username: your_username
+ - Password: your_password
+ - Database: ny_taxi
+### 🔹 Direct Access with psql
+```shell
+docker-compose run data_processor psql -h pgdatabase -U your_username -d ny_taxi
+```
+### ✅ Verifying Data
+```sql
+SELECT COUNT(*) FROM dataset1;
+SELECT * FROM dataset2 LIMIT 5;
+```
+### Cleaning Up
+To stop all containers:
+```shell
+docker-compose down
+```
+To remove all data (WARNING: This deletes all data):
+```shell
+docker-compose down --volumes
+```
