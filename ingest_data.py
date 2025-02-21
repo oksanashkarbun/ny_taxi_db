@@ -28,7 +28,6 @@ CHUNK_SIZE = 100_000  # Adjust as needed for performance
 
 
 def ingest_parquet(file_path):
-    """Loads a Parquet file into PostgreSQL in chunks."""
     table_name = os.path.splitext(os.path.basename(file_path))[0]  # Use filename as table name
     print(f"📂 Processing {file_path} into table `{table_name}` in chunks...")
 

@@ -12,13 +12,13 @@ cd ny_taxi_db_project
 ### 2️⃣ Create a .env File
 You need a .env file to store database credentials. Create it in the project root:
 ```ini
-POSTGRES_USER=your_username
-POSTGRES_PASSWORD=your_password
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
 POSTGRES_DB=ny_taxi
 POSTGRES_HOST=pgdatabase
 POSTGRES_PORT=5432
 PGADMIN_DEFAULT_EMAIL=admin@admin.com
-PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
+PGADMIN_DEFAULT_PASSWORD=password
 ```
 
 ## 🛠 Running it
@@ -47,16 +47,16 @@ docker-compose run data_processor psql -h pgdatabase -U user -d ny_taxi -c "\dt"
 ## 🖥️ Accessing the Database
 ### 🔹 pgAdmin (GUI)
 1. Open http://localhost:8080.
-2. Login: admin@admin.com / your_pgadmin_password.
+2. Login: admin@admin.com / password
 3. Connect to PostgreSQL using:
  - Host: pgdatabase
  - Port: 5432
- - Username: your_username
- - Password: your_password
+ - Username: user
+ - Password: password
  - Database: ny_taxi
 ### 🔹 Direct Access with psql
 ```shell
-docker-compose run data_processor psql -h pgdatabase -U your_username -d ny_taxi
+docker-compose run data_processor psql -h pgdatabase -U user -d ny_taxi
 ```
 ### ✅ Verifying Data
 ```sql
